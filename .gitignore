@@ -1,1 +1,5 @@
 /.vs
+/BEGaugesDemo/obj
+/src/CircularGauges/obj
+/src/CircularGauges/bin
+/BEGaugesDemo/bin
