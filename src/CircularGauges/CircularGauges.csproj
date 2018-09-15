@@ -48,7 +48,13 @@
     <Compile Include="CGControl.Designer.cs">
       <DependentUpon>CGControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="EnumCenterPos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CGControl.resx">
+      <DependentUpon>CGControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
