@@ -48,6 +48,7 @@
     <Compile Include="CGControl.Designer.cs">
       <DependentUpon>CGControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CGItem.cs" />
     <Compile Include="EnumCenterPos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -79,7 +79,7 @@ namespace CircularGauges
             }
         }
 
-        float Radius()
+        public float Radius()
         {
             var size = GaugeSize();
 
@@ -106,9 +106,30 @@ namespace CircularGauges
             return rad * 180 / Math.PI;
         }
 
+        public void AddItem(CGItem item, float position)
+        {
+            item.rPos = position;
+            _items.Add(item);
+        }
+
+        public bool RemoveItem(CGItem item)
+        {
+            return _items.Remove(item);
+        }
+
+        List<CGItem> _items = new List<CGItem>();
+        
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+
+            var g = e.Graphics;
+            foreach (var item in _items)
+                item.draw(g);
+            
+            //var pen = new Pen(Color.Black);
+            //g.DrawRectangle(pen,gaugeRect());
+            //g.DrawRectangle(pen, rect());
         }
     }
 }
