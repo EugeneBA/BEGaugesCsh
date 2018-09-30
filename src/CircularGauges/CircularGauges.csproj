@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CGArc.cs" />
     <Compile Include="CGControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -51,6 +52,7 @@
     <Compile Include="CGItem.cs" />
     <Compile Include="EnumCenterPos.cs" />
     <Compile Include="CGScale.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

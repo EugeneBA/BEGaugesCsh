@@ -20,7 +20,7 @@ namespace CircularGauges
 
         private float _rPos;
 
-        public float rPos
+        public float RPos
         {
             get => _rPos;
             set
@@ -41,16 +41,16 @@ namespace CircularGauges
             }
         }
 
-        private RectangleF AdjustRect(RectangleF rect, float rpos)
+        protected RectangleF AdjustRect(RectangleF rect, float rpos)
         {
             float radius = Parent.Radius();
-            float offset = radius - rPosToPoints(radius, rpos);
+            float offset = radius - RPosToPoints(radius, rpos);
             var newRec = RectangleF.Inflate(rect,-offset,-offset);
             newRec.Offset(offset,offset);
             return newRec;
         }
 
-        private float rPosToPoints(float r, float rpos)
+        protected float RPosToPoints(float r, float rpos)
         {
             if (rpos <= 0)
                 return 0.0f;

@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CircularGauges
@@ -17,7 +12,7 @@ namespace CircularGauges
             InitializeComponent();
         }
 
-        public  EnumCenterPos CenterPos { get; protected set; }= EnumCenterPos.CenterCenter;
+        public EnumCenterPos CenterPos { get; protected set; } = EnumCenterPos.CenterCenter;
 
         public float MinAngle
         {
@@ -55,7 +50,7 @@ namespace CircularGauges
             }
         }
 
-        SizeF GaugeSize()
+        private SizeF GaugeSize()
         {
             var size = Size;
             float w = size.Width;
@@ -79,46 +74,103 @@ namespace CircularGauges
             }
         }
 
-        public float Radius()
+        public RectangleF GaugeFullRect()
         {
-            var size = GaugeSize();
-
+            SizeF gsize = GaugeSize();
+            RectangleF res;
             switch (CenterPos)
             {
-                case EnumCenterPos.CenterCenter:
-                    return size.Height * 0.5f;
+                case EnumCenterPos.CenterLeft:
+                case EnumCenterPos.CenterRight:
+                    res = new RectangleF(0, 0, gsize.Width * 2, gsize.Height);
+                    break;
+
+                case EnumCenterPos.BottomLeft:
+                case EnumCenterPos.BottomRight:
+                    res = new RectangleF(0, 0, gsize.Width * 2, gsize.Height * 2);
+                    break;
 
                 case EnumCenterPos.BottomCenter:
-                    return size.Height;
+                    res = new RectangleF(0, 0, gsize.Width, gsize.Height * 2);
+                    break;
 
                 default:
-                    return size.Width;
+                    res = new RectangleF(0, 0, gsize.Width, gsize.Height);
+                    break;
+            }
+
+            Helper.MoveCenter(ref res,Center());
+            return res;
+        }
+
+        protected PointF Center()
+        {
+            RectangleF wrect = ClientRectangle;
+            //wrect.adjust(_padding,_padding,-_padding,-_padding);
+            PointF center = wrect.Center();
+            switch (CenterPos)
+            {
+                case EnumCenterPos.CenterLeft:
+                    center.X = wrect.Left;
+                    return center;
+                case EnumCenterPos.CenterRight:
+                    center.X = wrect.Right;
+                    return center;
+
+                case EnumCenterPos.BottomLeft:
+                    return new PointF(wrect.Left, wrect.Bottom);
+                case EnumCenterPos.BottomRight:
+                    return new PointF(wrect.Right, wrect.Bottom);
+                case EnumCenterPos.BottomCenter:
+                    center.Y = wrect.Bottom;
+                    return center;
+
+                default:
+                    return center;
             }
         }
 
-        public static double DegreesToRadians(double deg)
-        {
-            return deg * Math.PI / 180;
-        }
+        public float Radius()
+            {
+                var size = GaugeSize();
 
-        public static double RadiansToDegrees(double rad)
-        {
-            return rad * 180 / Math.PI;
-        }
+                switch (CenterPos)
+                {
+                    case EnumCenterPos.CenterCenter:
+                        return size.Height * 0.5f;
 
-        public void AddItem(CGItem item, float position)
-        {
-            item.rPos = position;
-            _items.Add(item);
-        }
+                    case EnumCenterPos.BottomCenter:
+                        return size.Height;
 
-        public bool RemoveItem(CGItem item)
-        {
-            return _items.Remove(item);
-        }
+                    default:
+                        return size.Width;
+                }
+            }
 
-        List<CGItem> _items = new List<CGItem>();
-        
+            public static double DegreesToRadians(double deg)
+            {
+                return deg * Math.PI / 180;
+            }
+
+            public static double RadiansToDegrees(double rad)
+            {
+                return rad * 180 / Math.PI;
+            }
+
+            public void AddItem(CGItem item, float position)
+            {
+                item.RPos = position;
+                _items.Add(item);
+            }
+
+            public bool RemoveItem(CGItem item)
+            {
+                return _items.Remove(item);
+            }
+
+            List<CGItem> _items = new List<CGItem>();
+
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -126,7 +178,7 @@ namespace CircularGauges
             var g = e.Graphics;
             foreach (var item in _items)
                 item.draw(g);
-            
+
             //var pen = new Pen(Color.Black);
             //g.DrawRectangle(pen,gaugeRect());
             //g.DrawRectangle(pen, rect());
