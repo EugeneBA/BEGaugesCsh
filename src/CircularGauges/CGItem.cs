@@ -6,14 +6,14 @@ namespace CircularGauges
     {
         protected CGItem(CGControl parent)
         {
-            _parent = parent;
+            Parent = parent;
         }
 
-        private readonly CGControl _parent;
+        public CGControl Parent { get; }
 
         protected void Update()
         {
-            _parent.Invalidate();
+            Parent.Invalidate();
         }
 
         public abstract void draw(Graphics g);
@@ -43,7 +43,7 @@ namespace CircularGauges
 
         private RectangleF AdjustRect(RectangleF rect, float rpos)
         {
-            float radius = _parent.Radius();
+            float radius = Parent.Radius();
             float offset = radius - rPosToPoints(radius, rpos);
             var newRec = RectangleF.Inflate(rect,-offset,-offset);
             newRec.Offset(offset,offset);
