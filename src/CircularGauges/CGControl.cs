@@ -10,6 +10,9 @@ namespace CircularGauges
         public CGControl()
         {
             InitializeComponent();
+            SetStyle(ControlStyles.UserPaint,true);
+            //SetStyle(ControlStyles.Opaque, true);
+            SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
         public EnumCenterPos CenterPos { get; protected set; } = EnumCenterPos.CenterCenter;
@@ -157,9 +160,9 @@ namespace CircularGauges
                 return rad * 180 / Math.PI;
             }
 
-            public void AddItem(CGItem item, float position)
+            public void AddItem(CGItem item, float rPos)
             {
-                item.RPos = position;
+                item.RPos = rPos;
                 _items.Add(item);
             }
 
@@ -169,7 +172,6 @@ namespace CircularGauges
             }
 
             List<CGItem> _items = new List<CGItem>();
-
 
         protected override void OnPaint(PaintEventArgs e)
         {

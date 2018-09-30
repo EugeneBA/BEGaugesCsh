@@ -30,7 +30,7 @@ namespace CircularGauges
             }
         }
 
-        private Color _color;
+        private Color _color = Color.Black;
         public Color Color
         {
             get => _color;

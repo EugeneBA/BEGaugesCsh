@@ -52,6 +52,12 @@
     <Compile Include="CircularGauges\ClockControl.Designer.cs">
       <DependentUpon>ClockControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CircularGauges\ClockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CircularGauges\ClockForm.Designer.cs">
+      <DependentUpon>ClockForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CircularGauges\ClockControl.resx">
       <DependentUpon>ClockControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CircularGauges\ClockForm.resx">
+      <DependentUpon>ClockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>

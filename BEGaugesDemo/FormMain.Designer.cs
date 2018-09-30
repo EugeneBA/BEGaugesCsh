@@ -55,6 +55,7 @@
             this._btnClockControl.Text = "Clock Control";
             this._btnClockControl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this._btnClockControl.UseVisualStyleBackColor = true;
+            this._btnClockControl.Click += new System.EventHandler(this._btnClockControl_Click);
             // 
             // FormMain
             // 

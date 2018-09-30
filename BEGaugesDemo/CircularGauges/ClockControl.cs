@@ -17,6 +17,10 @@ namespace BEGaugesDemo.CircularGauges
         {
             InitializeComponent();
             CenterPos = EnumCenterPos.CenterCenter;
+            var outArc = new CGArc(this);
+            AddItem(outArc,1);
+            outArc.RWidth = 10;
+            outArc.SetDegreeRange(90, -270);
         }
     }
 }

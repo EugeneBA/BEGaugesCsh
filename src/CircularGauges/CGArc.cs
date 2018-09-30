@@ -33,7 +33,7 @@ namespace CircularGauges
 
                 //painter->drawArc(arcRect, 16 * _minDegree, 16 * (_maxDegree - _minDegree));
 
-                g.DrawArc(pen,arcRect,_minDegree,_maxDegree);
+                g.DrawArc(pen,arcRect,-_minDegree, -(_maxDegree - _minDegree));
             }
         }
     }
