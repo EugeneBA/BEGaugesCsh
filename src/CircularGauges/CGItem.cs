@@ -18,7 +18,7 @@ namespace CircularGauges
 
         public abstract void draw(Graphics g);
 
-        private float _rPos;
+        protected float _rPos;
 
         public float RPos
         {
@@ -30,7 +30,7 @@ namespace CircularGauges
             }
         }
 
-        private Color _color = Color.Black;
+        protected Color _color = Color.Black;
         public Color Color
         {
             get => _color;

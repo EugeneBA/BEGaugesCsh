@@ -150,7 +150,17 @@ namespace CircularGauges
                 }
             }
 
-            public static double DegreesToRadians(double deg)
+        public PointF Point(float rpos, float deg)
+        {
+            //Q_ASSERT(rpos>=0);
+            float rx = (float) (Math.Cos(DegreesToRadians(deg)) * rpos);
+            float ry = (float) (-Math.Sin(DegreesToRadians(deg)) * rpos);
+
+            var center = Center();
+            return new PointF(center.X+rx,center.Y+ry);
+        }
+
+        public static double DegreesToRadians(double deg)
             {
                 return deg * Math.PI / 180;
             }
