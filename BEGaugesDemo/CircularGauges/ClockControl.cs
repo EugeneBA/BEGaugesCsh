@@ -37,6 +37,13 @@ namespace BEGaugesDemo.CircularGauges
             bigTicks.SetDegreeRange(90, -270);
             bigTicks.SetValueRange(0, 12);
             bigTicks.Step = 1;
+
+            var vals = new CGValues(this);
+            AddItem(vals, 0.85f);
+            vals.SetDegreeRange(60, -270);
+            vals.SetValueRange(1, 12);
+            vals.Step =1;
+            vals.RFontSize = 38;
         }
     }
 }
