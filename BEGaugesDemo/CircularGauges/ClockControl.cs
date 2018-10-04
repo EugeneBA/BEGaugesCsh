@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CircularGauges;
+﻿using CircularGauges;
 
 namespace BEGaugesDemo.CircularGauges
 {
@@ -44,6 +35,25 @@ namespace BEGaugesDemo.CircularGauges
             vals.SetValueRange(1, 12);
             vals.Step =1;
             vals.RFontSize = 38;
+
+            _hourNeedle = new CGTrapezeNeedle(this);
+            AddItem(_hourNeedle, 0);
+            _hourNeedle.RLength = 0.7f;
+            _hourNeedle.RWidth = 9;
+            _hourNeedle.SetDegreeRange(90, -270);
+            _hourNeedle.SetValueRange(0, 12);
+
+            _minuteNeedle = new CGTrapezeNeedle(this);
+            AddItem(_minuteNeedle,0);
+            _minuteNeedle.RLength = 0.9f;
+            _minuteNeedle.RWidth = 5;
+            _minuteNeedle.SetDegreeRange(90, -270);
+            _minuteNeedle.SetValueRange(0, 60);
+
+            _minuteNeedle.CurrentValue = 10;
         }
+
+        private CGTrapezeNeedle _hourNeedle;
+        private CGTrapezeNeedle _minuteNeedle;
     }
 }

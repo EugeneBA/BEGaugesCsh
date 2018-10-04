@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,17 @@ namespace CircularGauges
         {
             var center = rect.Center();
             rect.Offset(pos.X-center.X,pos.Y-center.Y);
+        }
+
+        public static float Bound(float min, float value, float max)
+        {
+            Debug.Assert(min<=max);
+
+            if (value < min)
+                value = min;
+            if (value > max)
+                value = max;
+            return value;
         }
     }
 }

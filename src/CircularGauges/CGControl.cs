@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace CircularGauges
@@ -106,7 +107,7 @@ namespace CircularGauges
             return res;
         }
 
-        protected PointF Center()
+        public PointF Center()
         {
             RectangleF wrect = ClientRectangle;
             //wrect.adjust(_padding,_padding,-_padding,-_padding);
@@ -188,6 +189,7 @@ namespace CircularGauges
             base.OnPaint(e);
 
             var g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             foreach (var item in _items)
                 item.draw(g);
 
