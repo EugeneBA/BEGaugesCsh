@@ -1,4 +1,6 @@
-﻿using CircularGauges;
+﻿using System;
+using System.Drawing;
+using CircularGauges;
 
 namespace BEGaugesDemo.CircularGauges
 {
@@ -50,10 +52,35 @@ namespace BEGaugesDemo.CircularGauges
             _minuteNeedle.SetDegreeRange(90, -270);
             _minuteNeedle.SetValueRange(0, 60);
 
-            _minuteNeedle.CurrentValue = 10;
+            _secondNeedle = new CGTriangleNeedle(this);
+            AddItem(_secondNeedle, 0);
+            _secondNeedle.RLength = 0.97f;
+            _secondNeedle.RWidth = 5;
+            _secondNeedle.SetDegreeRange(90, -270);
+            _secondNeedle.SetValueRange(0, 60);
+            _secondNeedle.Color = Color.Red;
+            
+            SetTime();
         }
 
         private CGTrapezeNeedle _hourNeedle;
         private CGTrapezeNeedle _minuteNeedle;
+        private CGTriangleNeedle _secondNeedle;
+
+        public void SetTime(TimeSpan value)
+        {
+            float hour = value.Hours % 12 + value.Minutes / 60.0f;
+            _hourNeedle.CurrentValue = hour;
+
+            float minute = value.Minutes + value.Seconds / 60.0f;
+            _minuteNeedle.CurrentValue = minute;
+
+            _secondNeedle.CurrentValue = value.Seconds;
+        }
+
+        public void SetTime()
+        {
+            SetTime(DateTime.Now.TimeOfDay);
+        }
     }
 }

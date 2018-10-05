@@ -28,8 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this._timer = new System.Windows.Forms.Timer(this.components);
             this._clockControl = new BEGaugesDemo.CircularGauges.ClockControl();
             this.SuspendLayout();
+            // 
+            // _timer
+            // 
+            this._timer.Enabled = true;
+            this._timer.Interval = 500;
+            this._timer.Tick += new System.EventHandler(this._timer_Tick);
             // 
             // _clockControl
             // 
@@ -37,14 +45,14 @@
             this._clockControl.Location = new System.Drawing.Point(0, 0);
             this._clockControl.Name = "_clockControl";
             this._clockControl.Padding = new System.Windows.Forms.Padding(5);
-            this._clockControl.Size = new System.Drawing.Size(547, 449);
+            this._clockControl.Size = new System.Drawing.Size(768, 562);
             this._clockControl.TabIndex = 0;
             // 
             // ClockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(547, 449);
+            this.ClientSize = new System.Drawing.Size(768, 562);
             this.Controls.Add(this._clockControl);
             this.Name = "ClockForm";
             this.Text = "Simple Clock";
@@ -55,5 +63,6 @@
         #endregion
 
         private ClockControl _clockControl;
+        private System.Windows.Forms.Timer _timer;
     }
 }

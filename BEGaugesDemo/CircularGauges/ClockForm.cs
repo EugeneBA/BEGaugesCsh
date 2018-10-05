@@ -16,5 +16,10 @@ namespace BEGaugesDemo.CircularGauges
         {
             InitializeComponent();
         }
+
+        private void _timer_Tick(object sender, EventArgs e)
+        {
+            _clockControl.SetTime();
+        }
     }
 }

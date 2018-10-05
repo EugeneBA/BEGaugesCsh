@@ -3,26 +3,10 @@ using System.Drawing.Drawing2D;
 
 namespace CircularGauges
 {
-    public class CGTrapezeNeedle : CGNeedle
+    public class CGTriangleNeedle : CGNeedle
     {
-        public CGTrapezeNeedle(CGControl parent) : base(parent)
+        public CGTriangleNeedle(CGControl parent) : base(parent)
         {
-            _aspect = 0.5f;
-        }
-
-        private float _aspect;
-
-        public float Aspect
-        {
-            get => _aspect;
-            set
-            {
-                value = Helper.Bound(0.0f, value, 1.0f);
-                if (_aspect == value)
-                    return;
-                _aspect = value;
-                Update();
-            }
         }
 
         public override void draw(Graphics g)
@@ -39,12 +23,10 @@ namespace CircularGauges
             var origin = RPosToPoints(r, _rPos);
             var length = RPosToPoints(r, RLength);
             var width = RPosToPoints(r, RWidth);
-            var smallwidth = width * Aspect;
 
             PointF[] points = {
+                new PointF(0, origin + length),
                 new PointF(-width, origin),
-                new PointF(-smallwidth, origin + length),
-                new PointF(smallwidth, origin + length),
                 new PointF(width, origin)};
 
             using (var brush = new SolidBrush(Color))
