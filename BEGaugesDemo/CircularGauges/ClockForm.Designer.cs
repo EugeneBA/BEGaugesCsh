@@ -44,7 +44,7 @@
             this._clockControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this._clockControl.Location = new System.Drawing.Point(0, 0);
             this._clockControl.Name = "_clockControl";
-            this._clockControl.Padding = new System.Windows.Forms.Padding(5);
+            this._clockControl.Padding = new System.Windows.Forms.Padding(20);
             this._clockControl.Size = new System.Drawing.Size(768, 562);
             this._clockControl.TabIndex = 0;
             // 

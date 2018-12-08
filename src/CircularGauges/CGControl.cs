@@ -11,8 +11,7 @@ namespace CircularGauges
         public CGControl()
         {
             InitializeComponent();
-            SetStyle(ControlStyles.UserPaint,true);
-            //SetStyle(ControlStyles.Opaque, true);
+            SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
@@ -54,9 +53,22 @@ namespace CircularGauges
             }
         }
 
+        public Rectangle PaddedRectangle
+        {
+            get
+            {
+                var rect = ClientRectangle;
+                var pad = Padding;
+                return new Rectangle(rect.X + pad.Left,
+                    rect.Y + pad.Top,
+                    rect.Width - (pad.Left + pad.Right),
+                    rect.Height - (pad.Top + pad.Bottom));
+            }
+        }
+
         private SizeF GaugeSize()
         {
-            var size = Size;
+            var size = PaddedRectangle.Size;
             float w = size.Width;
             float h = size.Height;
 
@@ -103,13 +115,13 @@ namespace CircularGauges
                     break;
             }
 
-            Helper.MoveCenter(ref res,Center());
+            Helper.MoveCenter(ref res, Center());
             return res;
         }
 
         public PointF Center()
         {
-            RectangleF wrect = ClientRectangle;
+            RectangleF wrect = PaddedRectangle;
             //wrect.adjust(_padding,_padding,-_padding,-_padding);
             PointF center = wrect.Center();
             switch (CenterPos)
@@ -135,54 +147,54 @@ namespace CircularGauges
         }
 
         public float Radius()
+        {
+            var size = GaugeSize();
+
+            switch (CenterPos)
             {
-                var size = GaugeSize();
+                case EnumCenterPos.CenterCenter:
+                    return size.Height * 0.5f;
 
-                switch (CenterPos)
-                {
-                    case EnumCenterPos.CenterCenter:
-                        return size.Height * 0.5f;
+                case EnumCenterPos.BottomCenter:
+                    return size.Height;
 
-                    case EnumCenterPos.BottomCenter:
-                        return size.Height;
-
-                    default:
-                        return size.Width;
-                }
+                default:
+                    return size.Width;
             }
+        }
 
         public PointF Point(float rpos, float deg)
         {
             //Q_ASSERT(rpos>=0);
-            float rx = (float) (Math.Cos(DegreesToRadians(deg)) * rpos);
-            float ry = (float) (-Math.Sin(DegreesToRadians(deg)) * rpos);
+            float rx = (float)(Math.Cos(DegreesToRadians(deg)) * rpos);
+            float ry = (float)(-Math.Sin(DegreesToRadians(deg)) * rpos);
 
             var center = Center();
-            return new PointF(center.X+rx,center.Y+ry);
+            return new PointF(center.X + rx, center.Y + ry);
         }
 
         public static double DegreesToRadians(double deg)
-            {
-                return deg * Math.PI / 180;
-            }
+        {
+            return deg * Math.PI / 180;
+        }
 
-            public static double RadiansToDegrees(double rad)
-            {
-                return rad * 180 / Math.PI;
-            }
+        public static double RadiansToDegrees(double rad)
+        {
+            return rad * 180 / Math.PI;
+        }
 
-            public void AddItem(CGItem item, float rPos)
-            {
-                item.RPos = rPos;
-                _items.Add(item);
-            }
+        public void AddItem(CGItem item, float rPos)
+        {
+            item.RPos = rPos;
+            _items.Add(item);
+        }
 
-            public bool RemoveItem(CGItem item)
-            {
-                return _items.Remove(item);
-            }
+        public bool RemoveItem(CGItem item)
+        {
+            return _items.Remove(item);
+        }
 
-            List<CGItem> _items = new List<CGItem>();
+        private List<CGItem> _items = new List<CGItem>();
 
         protected override void OnPaint(PaintEventArgs e)
         {

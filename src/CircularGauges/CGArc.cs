@@ -28,6 +28,9 @@ namespace CircularGauges
 
             RectangleF arcRect = AdjustRect(Parent.GaugeFullRect(), RPos);
 
+            if (arcRect.IsEmpty)
+                return;
+
             using (var pen = new Pen(Color, RPosToPoints(r, RWidth)))
             {
 
